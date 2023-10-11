@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "espublicotech.base-url",
+    "type": "java.lang.String",
+    "description": "A description for 'espublicotech.base-url'"
+  },
+  {
+    "name": "localhost",
+    "type": "java.lang.String",
+    "description": "A description for 'localhost'"
+  }
+]}
