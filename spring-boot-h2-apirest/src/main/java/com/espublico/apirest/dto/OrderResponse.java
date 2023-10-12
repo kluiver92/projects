@@ -13,4 +13,8 @@ public class OrderResponse {
     
     @JsonProperty("content")
     public List<Order> content;
+    
+    
+    @JsonProperty("conteo")
+    public List<String> conteo;
 }
