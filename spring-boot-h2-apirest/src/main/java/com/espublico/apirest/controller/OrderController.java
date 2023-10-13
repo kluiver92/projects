@@ -8,7 +8,10 @@ import com.espublico.apirest.service.OrderService;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -37,15 +40,21 @@ public class OrderController {
     	orderResponse.getContent().forEach(oderComp -> orderService.findOne(oderComp.getUuid()));
     	this.orderService.createOrders(orderResponse.getContent());
     	this.conteo(orderResponse);
-
     	return orderResponse;
     }
     
     @RequestMapping(path = "/csvOrders")
-    public void getAllEmployeesInCsv(HttpServletResponse servletResponse) throws IOException {
-        servletResponse.setContentType("text/csv");
-        servletResponse.addHeader("Content-Disposition","attachment; filename=\"employees.csv\"");
-        csvExportService.writeEmployeesToCsv(servletResponse.getWriter());
+    public void getOrdersInCsv(HttpServletResponse servletResponse) throws IOException {
+    	
+    	 servletResponse.setContentType("text/csv");
+         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+         String currentDateTime = dateFormatter.format(new Date());
+          
+         String headerKey = "Content-Disposition";
+         String headerValue = "attachment; filename=orders_" + currentDateTime + ".csv";
+         servletResponse.setHeader(headerKey, headerValue);
+    	
+        csvExportService.writeOrdersToCsv(servletResponse.getWriter());
     }
     
         
